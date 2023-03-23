@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="{%static 'assets/plugins/bootstrap/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{%static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{%static 'assets/plugins/pace/pace-theme-big-counter.css' %}" rel="stylesheet" />
+   <link href="{%static 'assets/css/style.css' %}" rel="stylesheet" />
+      <link href="{%static 'assets/css/main-style.css' %}" rel="stylesheet" />
+
+</head>
+
+<body class="body-Login-back">
+
+    <div class="container">
+       
+        <div class="row">
+            <div class="col-md-4 text-center">
+              <img src="{%static 'assets/img/logo.png' %}" alt=""/>
+            </div>
+            <div class="col-md-3">
+                
+            </div>
+            <div class="col-md-4">
+                {% block content %}
+                <div class="login-panel panel panel-default mt-5" style="margin-top: 120px !important;">                  
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                              
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Username" name="uname" type="text" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Password" name="pswd" type="password">
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                                <br>
+                                <br>
+                                
+                            
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                {% endblock  %}
+            </div>
+        </div>
+    </div>
+
+     <!-- Core Scripts - Include with every page -->
+    <script src="{%static 'assets/plugins/jquery-1.10.2.js' %}"></script>
+    <script src="{%static 'assets/plugins/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{%static 'assets/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+
+</body>
+
+</html>

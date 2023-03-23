@@ -1,0 +1,239 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="{%static 'assets/plugins/bootstrap/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{%static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{%static 'assets/plugins/pace/pace-theme-big-counter.css' %}" rel="stylesheet" />
+    <link href="{%static 'assets/css/style.css' %}" rel="stylesheet" />
+    <link href="{%static 'assets/css/main-style.css' %}" rel="stylesheet" />
+    <!-- Page-Level CSS -->
+    <link href="{%static 'assets/plugins/morris/morris-0.4.3.min.css' %}" rel="stylesheet" />
+   </head>
+<body>
+    <!--  wrapper -->
+    <div id="wrapper">
+        <!-- navbar top -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+            <!-- navbar-header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <img src="{%static 'assets/img/logo.png' %}" alt="" />
+                </a>
+            </div>
+            <!-- end navbar-header -->
+            <!-- navbar-top-links -->
+            <ul class="nav navbar-top-links navbar-right">
+                <!-- main dropdown -->
+                
+               
+
+               
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-3x"></i>
+                    </a>
+                    <!-- dropdown user-->
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                        </li>
+                    </ul>
+                    <!-- end dropdown-user -->
+                </li>
+                <!-- end main dropdown -->
+            </ul>
+            <!-- end navbar-top-links -->
+
+        </nav>
+        <!-- end navbar top -->
+
+        <!-- navbar side -->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <!-- sidebar-collapse -->
+            <div class="sidebar-collapse">
+                <!-- side-menu -->
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <!-- user image section-->
+                        <div class="user-section">
+                            <div class="user-section-inner">
+                                <img src="{{userdetails.User_Image.url}}" alt="">
+                            </div>
+                            <div class="user-info">
+                                <div>{{request.user.first_name}} <strong></strong></div>
+                                <div class="user-text-online">    
+                                    UserId: {{userdetails.User_Key}}
+                                </div>
+                            </div>
+                        </div>
+                        <!--end user image section-->
+                    </li>
+                    <li class="sidebar-search">
+                        <!-- search section-->
+                        <h4 style="color:white">Sent a Reference Link:</h4>
+                        <div class="input-group custom-search-form">
+                            <form action="{%url 'SentRefrelLink' userdetails.id %}" method="post">
+                                {% csrf_token %}
+                            <input type="email" class="form-control" name="email" placeholder="Email id">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    Sent
+                                </button>
+                            </span>
+                        </form>
+                        </div>
+                        <!--end search section-->
+                    </li>
+                    <li class="selected">
+                        <a href="{%url 'Index' %}"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> My Team<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="flot.html">Direct</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Team</a>
+                            </li>
+                            <li>
+                                <a href="morris.html">Team Level</a>
+                            </li>
+                        </ul>
+                        <!-- second-level-items -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-flask fa-fw"></i>My Earning<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="panels-wells.html">Sponser Income</a>
+                            </li>
+                            <li>
+                                <a href="buttons.html">Level Income</a>
+                            </li>
+                            <li>
+                                <a href="notifications.html">Add-on Sponser Income</a>
+                            </li>
+                            <li>
+                                <a href="typography.html">Add-on level Income</a>
+                            </li>
+                            <li>
+                                <a href="grid.html">Add-on Cycle Sponser Income</a>
+                            </li>
+                            <li>
+                                <a href="grid.html">Add-on Cycle Level Income</a>
+                            </li>
+                        </ul>
+                        <!-- second-level-items -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Withdrawal<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Withdrawal</a>
+                            </li>
+                            <li>
+                                <a href="#">Withdrawal History</a>
+                            </li>
+                        </ul>
+                        <!-- second-level-items -->
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-files-o fa-fw"></i>Reports<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="blank.html">Blank Page</a>
+                            </li>
+                            <li>
+                                <a href="login.html">Login Page</a>
+                            </li>
+                        </ul>
+                        <!-- second-level-items -->
+                    </li>
+                </ul>
+                <!-- end side-menu -->
+            </div>
+            <!-- end sidebar-collapse -->
+        </nav>
+        <!-- end navbar side -->
+        <!--  page-wrapper -->
+        <div id="page-wrapper">
+
+            <div class="row">
+                <!-- Page Header -->
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <!--End Page Header -->
+            </div>
+
+
+            <div class="row">
+                <!--quick info section -->
+                <div class="col-lg-3">
+                    <div class="alert alert-danger text-center">
+                        <i class="fa fa-calendar fa-3x"></i>&nbsp;<b></b>Add-on level
+
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="alert alert-success text-center">
+                        <i class="fa  fa-beer fa-3x"></i>&nbsp;<b></b>Add-on Sponser  
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="alert alert-info text-center">
+                        <i class="fa fa-rss fa-3x"></i>&nbsp;<b></b> Add-on Cycle level
+
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="alert alert-warning text-center">
+                        <i class="fa  fa-pencil fa-3x"></i>&nbsp;<b> </b>Add-on Cycle level Sponser
+                    </div>
+                </div>
+                <!--end quick info section -->
+            </div>
+            
+
+        
+
+         
+
+
+        </div>
+        <!-- end page-wrapper -->
+
+    </div>
+    <!-- end wrapper -->
+
+    <!-- Core Scripts - Include with every page -->
+    <script src="{%static 'assets/plugins/jquery-1.10.2.js' %}"></script>
+    <script src="{%static 'assets/plugins/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{%static 'assets/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+    <script src="{%static 'assets/plugins/pace/pace.js' %}"></script>
+    <script src="{%static 'assets/scripts/siminta.js' %}"></script>
+    <!-- Page-Level Plugin Scripts-->
+    <script src="{%static 'assets/plugins/morris/raphael-2.1.0.min.js' %}"></script>
+    <script src="{%static 'assets/plugins/morris/morris.js' %}"></script>
+    <script src="{%static 'assets/scripts/dashboard-demo.js' %}"></script>
+
+</body>
+
+</html>

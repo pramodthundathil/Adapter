@@ -1,0 +1,45 @@
+{% extends "login.html" %}
+{% block content %}
+<style>
+    fieldset input{
+        width: 90%;
+        padding: 5px;
+        border: .5px solid rgb(177, 174, 174);
+        border-radius: 4px;
+    }
+</style>
+
+<div class="login-panel panel panel-default mt-5" style="margin-top: 120px !important;">                  
+    <div class="panel-heading">
+        <h3 class="panel-title">Please Sign Up</h3>
+    </div>
+    <div class="panel-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+              
+            <fieldset>
+                {% for fields in form %}
+                <div class="form-group">
+        {{fields.label}}: <br>
+        {{fields}}
+    </div>
+    {% endfor %}
+    <div class="form-group">
+        <input type="file" name="img" required>Upload Profile pic
+    </div>
+                <!-- Change this to a button or input when using this as a form -->
+                <button type="submit" class="btn btn-lg btn-success btn-block">Register</button>
+                <br>
+                <br>
+                <!-- Have An Account Login <a href="{%url 'SignIn' %}">Here</a> -->
+            
+
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+    
+
+{% endblock %}
