@@ -1,10 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <title>Adapter</title>
     <!-- Core CSS - Include with every page -->
     <link href="{%static 'assets/plugins/bootstrap/bootstrap.css' %}" rel="stylesheet" />
     <link href="{%static 'assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
@@ -13,7 +14,8 @@
     <link href="{%static 'assets/css/main-style.css' %}" rel="stylesheet" />
     <!-- Page-Level CSS -->
     <link href="{%static 'assets/plugins/morris/morris-0.4.3.min.css' %}" rel="stylesheet" />
-   </head>
+</head>
+
 <body>
     <!--  wrapper -->
     <div id="wrapper">
@@ -27,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{%url 'Index' %}">
                     <img src="{%static 'assets/img/logo.png' %}" alt="" />
                 </a>
             </div>
@@ -35,10 +37,6 @@
             <!-- navbar-top-links -->
             <ul class="nav navbar-top-links navbar-right">
                 <!-- main dropdown -->
-                
-               
-
-               
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -51,7 +49,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                        <li><a href="{%url 'SignOut' %}"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                         </li>
                     </ul>
                     <!-- end dropdown-user -->
@@ -77,7 +75,7 @@
                             </div>
                             <div class="user-info">
                                 <div>{{request.user.first_name}} <strong></strong></div>
-                                <div class="user-text-online">    
+                                <div class="user-text-online">
                                     UserId: {{userdetails.User_Key}}
                                 </div>
                             </div>
@@ -90,13 +88,13 @@
                         <div class="input-group custom-search-form">
                             <form action="{%url 'SentRefrelLink' userdetails.id %}" method="post">
                                 {% csrf_token %}
-                            <input type="email" class="form-control" name="email" placeholder="Email id">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    Sent
-                                </button>
-                            </span>
-                        </form>
+                                <input type="email" class="form-control" name="email" placeholder="Email id">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        Sent
+                                    </button>
+                                </span>
+                            </form>
                         </div>
                         <!--end search section-->
                     </li>
@@ -107,13 +105,13 @@
                         <a href="#"><i class="fa fa-sitemap fa-fw"></i> My Team<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="flot.html">Direct</a>
+                                <a href="{%url 'MyTeamDirect' %}">Direct</a>
                             </li>
                             <li>
-                                <a href="morris.html">Team</a>
+                                <a href="{%url 'Myteam' %}">Team</a>
                             </li>
                             <li>
-                                <a href="morris.html">Team Level</a>
+                                <a href="#">Team Level</a>
                             </li>
                         </ul>
                         <!-- second-level-items -->
@@ -122,22 +120,25 @@
                         <a href="#"><i class="fa fa-flask fa-fw"></i>My Earning<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="panels-wells.html">Sponser Income</a>
+                                <a href="{%url 'SponserIncome' %}">Sponser Income</a>
                             </li>
                             <li>
-                                <a href="buttons.html">Level Income</a>
+                                <a href="{%url 'Levelincome' %}">Level Income</a>
                             </li>
                             <li>
-                                <a href="notifications.html">Add-on Sponser Income</a>
+                                <a href="{%url 'Rebirthincome' %}">ReBirth Income</a>
                             </li>
                             <li>
-                                <a href="typography.html">Add-on level Income</a>
+                                <a href="#">Add-on Sponser Income</a>
                             </li>
                             <li>
-                                <a href="grid.html">Add-on Cycle Sponser Income</a>
+                                <a href="#">Add-on level Income</a>
                             </li>
                             <li>
-                                <a href="grid.html">Add-on Cycle Level Income</a>
+                                <a href="#">Add-on Cycle Sponser Income</a>
+                            </li>
+                            <li>
+                                <a href="#">Add-on Cycle Level Income</a>
                             </li>
                         </ul>
                         <!-- second-level-items -->
@@ -146,24 +147,17 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Withdrawal<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">Withdrawal</a>
+                                <a href="{%url 'Withdrawal' %}">Withdrawal</a>
                             </li>
                             <li>
-                                <a href="#">Withdrawal History</a>
+                                <a href="{%url 'WithdrawalHistory' %}">Withdrawal History</a>
                             </li>
                         </ul>
                         <!-- second-level-items -->
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i>Reports<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="blank.html">Blank Page</a>
-                            </li>
-                            <li>
-                                <a href="login.html">Login Page</a>
-                            </li>
-                        </ul>
+                        <a href="#"><i class="fa fa-files-o fa-fw"></i>Reports</a>
+
                         <!-- second-level-items -->
                     </li>
                 </ul>
@@ -173,49 +167,192 @@
         </nav>
         <!-- end navbar side -->
         <!--  page-wrapper -->
+
         <div id="page-wrapper">
 
+            {% block content %}
             <div class="row">
                 <!-- Page Header -->
                 <div class="col-lg-12">
                     <h1 class="page-header">Dashboard</h1>
+                    <h2 style="text-align: right;"><a class="btn btn-warning btn-lg" href="{%url 'Rebirth' %}">Click
+                            Here For Rebirth</a></h2>
                 </div>
                 <!--End Page Header -->
             </div>
+            {% for message in messages  %}
+            <div class="alert alert-info">
+                &nbsp;Hello ! </b> <b>{{message}} </b>
 
+            </div>
+
+            {% endfor %}
 
             <div class="row">
                 <!--quick info section -->
                 <div class="col-lg-3">
                     <div class="alert alert-danger text-center">
-                        <i class="fa fa-calendar fa-3x"></i>&nbsp;<b></b>Add-on level
+                        &nbsp;<b></b>Total Income <br>
+                        <br>
+                        <h4>${{total}}</h4>
 
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="alert alert-success text-center">
-                        <i class="fa  fa-beer fa-3x"></i>&nbsp;<b></b>Add-on Sponser  
+                        &nbsp;<b></b>Sponser Income <br><br>
+                        <h4>${{userdetails.Sponser_income}}</h4>
+
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="alert alert-info text-center">
-                        <i class="fa fa-rss fa-3x"></i>&nbsp;<b></b> Add-on Cycle level
+                        &nbsp;<b></b>Level Income <br><br>
+                        <h4>${{userdetails.Level_income}}</h4>
 
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="alert alert-warning text-center">
-                        <i class="fa  fa-pencil fa-3x"></i>&nbsp;<b> </b>Add-on Cycle level Sponser
+                        &nbsp;<b> </b>Rebirth Income
+                        <br><br>
+
+                        <h4>${{userdetails.ReBirth_Income}}</h4>
+
                     </div>
                 </div>
                 <!--end quick info section -->
             </div>
-            
 
-        
+            <div class="row">
+                <!--quick info section -->
+                <div class="col-lg-3">
+                    <div class="panel panel-primary text-center no-boder">
+                        <div class="panel-footer">
+                            <span class="panel-eyecandy-title">Add-On Level
+                            </span>
+                        </div>
+                        <div class="panel-body alert-danger">
+                            <i class="fa fa-bar-chart-o fa-3x"></i>
+                            <h3>{{teammembers_count}} </h3>
+                        </div>
 
-         
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="panel panel-primary text-center no-boder">
+                        <div class="panel-footer">
+                            <span class="panel-eyecandy-title">Add-On Sponsor
+                            </span>
+                        </div>
+                        <div class="panel-body alert-success">
+                            <i class="fa fa-pencil-square-o fa-3x"></i>
+                            <h3>{{T1_count}}</h3>
+                        </div>
 
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="panel panel-primary text-center no-boder">
+                        <div class="panel-footer">
+                            <span class="panel-eyecandy-title">Add-On Cycle Level
+                            </span>
+                        </div>
+                        <div class="panel-body alert-info">
+                            <i class="fa fa fa-floppy-o fa-3x"></i>
+                            <h3>20 GB</h3>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="panel panel-primary text-center no-boder">
+                        <div class="panel-footer">
+                            <span class="panel-eyecandy-title">Add-On Cycle Sponsor
+                            </span>
+                        </div>
+                        <div class="panel-body alert-warning">
+                            <i class="fa fa-thumbs-up fa-3x"></i>
+                            <h3>2,700 </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--end quick info section -->
+            </div>
+
+            <div class="row">
+                <!--quick info section -->
+                <div class="col-lg-4">
+                    <div class="panel panel-primary text-center no-boder">
+                        <div class="panel-footer">
+                            <span class="panel-eyecandy-title">Sponser
+                            </span>
+                        </div>
+                        <div class="panel-body alert-danger">
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="{{T1_S.User_Image.url}}" style="width:100px;height:120px" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <h4>{{T1_S.UserId.first_name}}</h4>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-primary text-center no-boder">
+                        <div class="panel-footer">
+                            <span class="panel-eyecandy-title">Add-On Sponsor Team Members
+                            </span>
+                        </div>
+                        <div class="panel-body alert-success">
+                            <!-- <i class="fa fa-pencil-square-o fa-3x"></i> -->
+                            {% for i  in T1  %}
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="{{i.team.User_Image.url}}" style="width:50px;height:60px" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <h4>{{i.team.UserId.first_name}}</h4>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-primary text-center no-boder">
+                        <div class="panel-footer">
+                            <span class="panel-eyecandy-title">Add-On Level Team Members
+                            </span>
+                        </div>
+                        <div class="panel-body alert-info">
+                            {% for i  in teammembers  %}
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="{{i.User_Image.url}}" style="width:50px;height:60px" alt="">
+                                </div>
+                                <div class="col-8">
+                                    <h4>{{i.UserId.first_name}}</h4>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--end quick info section -->
+            </div>
+
+            {% endblock content %}
 
         </div>
         <!-- end page-wrapper -->

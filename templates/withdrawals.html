@@ -1,0 +1,69 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="row">
+    <!-- Page Header -->
+    <div class="col-lg-12">
+        <h1 class="page-header">Withdrawals</h1>
+    </div>
+    <!--End Page Header -->
+</div>
+
+<div class="col-lg-12">
+    
+    {% for message in messages  %}
+    <div class="alert alert-info">
+        &nbsp;Hello ! </b> <b>{{message}} </b>
+
+    </div>
+        
+    {% endfor %}
+        
+    
+</div>
+
+<div class="row">
+    <!--quick info section -->
+    <div class="col-lg-3">
+        <div class="alert alert-danger text-center">
+            &nbsp;<b></b>Total Income <br>
+            <br>
+            <h4>${{total}}</h4>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="alert alert-success text-center">
+            &nbsp;<b></b>Sponser Income <br><br>
+            <h4>${{userdetails.Sponser_income}}</h4>
+            <form action="{%url 'Withrawal_sponser' %}" method="post">
+                {% csrf_token %}
+                <input type="number" name="amount" class="form-control" placeholder="Enter Amount To Withdrow"><br>
+            <button type="submit" class="btn btn-success">Withdraw from Sponser Income</button>
+        </form>
+
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="alert alert-info text-center">
+            &nbsp;<b></b>Level Income <br><br>
+            <h4>${{userdetails.Level_income}}</h4>
+            <form action="{%url 'Withrawal_Level' %}" method="post">
+                {% csrf_token %}
+                <input type="number" name="amount" class="form-control" placeholder="Enter Amount To Withdrow"><br>
+            <button class="btn btn-success">Withdraw from Level Income</button>
+            </form>
+
+
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="alert alert-warning text-center">
+            &nbsp;<b> </b>Rebirth Income
+            <br><br>
+
+            <h4>${{userdetails.ReBirth_Income}}</h4>
+
+        </div>
+    </div>
+    <!--end quick info section -->
+</div>
+{% endblock %}

@@ -7,11 +7,15 @@
         border: .5px solid rgb(177, 174, 174);
         border-radius: 4px;
     }
+    ul{
+        list-style: none;
+    }
 </style>
 
 <div class="login-panel panel panel-default mt-5" style="margin-top: 120px !important;">                  
     <div class="panel-heading">
         <h3 class="panel-title">Please Sign Up</h3>
+        <h5 style="color:red">{{form.errors}}</h5>
     </div>
     <div class="panel-body">
         <form method="post" enctype="multipart/form-data">

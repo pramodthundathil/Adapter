@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="row">
+    <!-- Page Header -->
+    <div class="col-lg-12">
+        <h1 class="page-header">Sponser Income</h1>
+    </div>
+    <!--End Page Header -->
+</div>
+<div class="col-lg-12">
+    <!--  Donut Chart -->
+   <div class="panel panel-default">
+       <div class="panel-heading">
+           Sponser Income
+       </div>
+       <div class="panel-body text-center">
+        
+            <h2>${{userdetails.Sponser_income}}</h2>
+       </div>
+   </div>
+   <!-- End Donut Chart -->
+</div>
+
+{% endblock %}
