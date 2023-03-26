@@ -36,7 +36,7 @@
             <h4>${{userdetails.Sponser_income}}</h4>
             <form action="{%url 'Withrawal_sponser' %}" method="post">
                 {% csrf_token %}
-                <input type="number" name="amount" class="form-control" placeholder="Enter Amount To Withdrow"><br>
+                <input type="number" name="amount" class="form-control" placeholder="Enter Amount To Withdraw" required><br>
             <button type="submit" class="btn btn-success">Withdraw from Sponser Income</button>
         </form>
 
@@ -48,7 +48,7 @@
             <h4>${{userdetails.Level_income}}</h4>
             <form action="{%url 'Withrawal_Level' %}" method="post">
                 {% csrf_token %}
-                <input type="number" name="amount" class="form-control" placeholder="Enter Amount To Withdrow"><br>
+                <input type="number" name="amount" class="form-control" placeholder="Enter Amount To Withdraw" required><br>
             <button class="btn btn-success">Withdraw from Level Income</button>
             </form>
 

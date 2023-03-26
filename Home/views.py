@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, HttpResponse
 from .forms import UserAddForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import UserDetails, ChainLevel, TeamOne, TeamMembers,Withdrawals
+from .models import UserDetails, TeamOne, TeamMembers,Withdrawals
 from datetime import datetime
+from Rebirth.models import UserDetails2,UserKey,TeamOne2,TeamMembers2
 
 
 from django.conf import settings
@@ -15,6 +16,9 @@ from django.contrib.sites.shortcuts import get_current_site
 # Create your views here.
 
 def Index(request):
+    rebirhdata = None
+    if UserDetails2.objects.filter(UserId = request.user).exists():
+        rebirhdata  = UserDetails2.objects.filter(UserId = request.user)
     userdetails = UserDetails.objects.get(UserId = request.user)
     T1 = TeamOne.objects.filter(Sponser = request.user)
     T1_S = TeamOne.objects.get(team = userdetails)
@@ -31,7 +35,8 @@ def Index(request):
         'T1_count':T1.count(),
         "T1_S":userdetails_sponser,
         "teammembers":teammembers,
-        "teammembers_count":len(teammembers)
+        "teammembers_count":len(teammembers),
+        "rebirhdata":rebirhdata
     }
     return render(request,'index.html',context)
 
@@ -53,15 +58,32 @@ def SignUp(request,link):
     form = UserAddForm()
     if request.method == "POST":
         form = UserAddForm(request.POST)
-        image = request.FILES['img']
+        # image = request.FILES['img']
         if form.is_valid():
             user = form.save()
             user.save()
             
-            details = UserDetails.objects.create(UserId = user,User_Key = "A7{}{}".format(datetime.now().day,user.id),Hierachi_Level = 1,User_Image = image,Sponser_income = 0,Level_income = 0,My_income = 0,ReBirth_Income = 0)
-            details.save()
             
-            userdetails = UserDetails.objects.get(User_Key = link)
+            
+            details = UserDetails.objects.create(UserId = user,User_Key = "A7{}{}".format(datetime.now().day,user.id),Hierachi_Level = 1,Sponser_income = 0,Level_income = 0,My_income = 0,ReBirth_Income = 0,RebirthCount = 0)
+            details.save()
+            try:
+                userdetails = UserDetails.objects.get(User_Key = link)
+            except:
+                userkey = UserKey.objects.get(User_Key = link)
+                userdetails = UserDetails2.objects.get(User_Key = userkey)
+                # userdetails = UserDetails.objects.get(User_Key = link)
+                
+                
+            # rebirth = UserDetails2.objects.all()
+            # for rb in rebirth:
+            #     if rb.User_Key.User_Key == link:
+            #         userkey = rb.User_Key
+            #         userdetails = UserDetails2.objects.get(User_Key = userkey)
+
+            
+                
+            
             userdetails.Sponser_income = userdetails.Sponser_income+15
             
             if userdetails.Hierachi_Level >=3:
@@ -70,32 +92,53 @@ def SignUp(request,link):
             userdetails.Hierachi_Level = userdetails.Hierachi_Level+1
             userdetails.save()
             
-            T1 = TeamOne.objects.create(Sponser = userdetails.UserId, team = details )
-            T1.save()
+            try:
+                key = UserKey.objects.get(User_Key = link)
+                details = UserDetails2.objects.get(User_key = key)
+                T1 = TeamOne2.objects.create(Sponser = details.UserId, team = details )
+                T1.save()
+                TM = TeamMembers2.objects.create(sponser = details,member = user )
+                TM.save()
+                if TeamMembers2.objects.filter(member = details.UserId ).exists():
+                    teammember = TeamMembers2.objects.filter(member = details.UserId)
+                    for i in teammember:
+                        TM2 = TeamMembers2.objects.create(sponser = i.sponser,member = user )
+                        TM2.save()
+                
+                teams = TeamMembers2.objects.filter(member = user)
+                for valu in teams:
             
-            TM = TeamMembers.objects.create(sponser = userdetails,member = user )
-            TM.save()
+                    v = UserDetails2.objects.get(id = valu.sponser.id)
+                    v.Level_income = v.Level_income + 2.5
+                    v.ReBirth_Income = v.ReBirth_Income + 2.5
+                    v.save()
+            except:
+                pass
+            try:
+                T1 = TeamOne.objects.create(Sponser = userdetails.UserId, team = details )
+                T1.save()
             
-            if TeamMembers.objects.filter(member = userdetails.UserId ).exists():
-                teammember = TeamMembers.objects.filter(member = userdetails.UserId)
-                for i in teammember:
-                    if TeamMembers.objects.filter(sponser = i.sponser).count() >=7:
-                        continue
-                    TM2 = TeamMembers.objects.create(sponser = i.sponser,member = user )
-                    TM2.save()
+                TM = TeamMembers.objects.create(sponser = userdetails,member = user )
+                TM.save()
+            
+                if TeamMembers.objects.filter(member = userdetails.UserId ).exists():
+                    teammember = TeamMembers.objects.filter(member = userdetails.UserId)
+                    for i in teammember:
+                        TM2 = TeamMembers.objects.create(sponser = i.sponser,member = user )
+                        TM2.save()
                     
-            teams = TeamMembers.objects.filter(member = user)
+                teams = TeamMembers.objects.filter(member = user)
                 
-            for valu in teams:
-                if valu.sponser == userdetails:
-                    continue
-                v = UserDetails.objects.get(id = valu.sponser.id)
-                v.Level_income = v.Level_income + 2.5
-                v.ReBirth_Income = v.ReBirth_Income + 2.5
-                v.save()
+                for valu in teams:
+                    if valu.sponser == userdetails:
+                        continue
+                    v = UserDetails.objects.get(id = valu.sponser.id)
+                    v.Level_income = v.Level_income + 2.5
+                    v.ReBirth_Income = v.ReBirth_Income + 2.5
+                    v.save()
+            except:
+                pass
                 
-            
-                  
             messages.info(request,"User Created")
             return redirect('SignIn')
     context  = {
@@ -105,8 +148,13 @@ def SignUp(request,link):
 
 
 def SentRefrelLink(request,pk):
-    userdetails = UserDetails.objects.get(id=pk)
-    activationkey = userdetails.User_Key
+    try:
+        userdetails = UserDetails2.objects.get(id=pk)
+        activationkey = userdetails.User_Key.User_Key
+    except:
+        userdetails = UserDetails.objects.get(id=pk)
+        activationkey = userdetails.User_Key
+        
     email = request.POST['email']
     current_site = get_current_site(request)
     mail_subject = 'Join Adaper 7 Referal Link'
@@ -120,6 +168,8 @@ def SentRefrelLink(request,pk):
     email.send(fail_silently=True)
                 
     return redirect('Index')
+
+
 
 def SignOut(request):
     logout(request)
@@ -318,27 +368,6 @@ def WithdrawalHistory(request):
 
 # ReBirth ---------------------------------------------------
 
-def Rebirth(request):
-    userdata = UserDetails.objects.get(UserId = request.user)
-    team = TeamMembers.objects.filter(sponser = userdata)
-    
-    if len(team) < 20:
-        messages.info(request,"You dont have 20 Team members please achive the team stregth")
-        return redirect("Index")
-    
-    teamone =  TeamOne.objects.filter(Sponser = request.user)
-    if len(teamone) <2:
-        messages.info(request,"You dont have 20 Team members please achive the team stregth")
-        return redirect("Index")
-    if userdata.ReBirth_Income < 50:
-        messages.info(request,"You have Insufficient Fund")
-        return redirect("Index")
-    else:
-        userdata.ReBirth_Income = userdata.ReBirth_Income - 50
-        userdata.save()
-        # team = TeamMembers.objects.filter(sponser = userdata)
-        
-        
         
             
     

@@ -16,5 +16,5 @@ urlpatterns = [
     path("Withrawal_sponser",views.Withrawal_sponser,name="Withrawal_sponser"),
     path("Withrawal_Level",views.Withrawal_Level,name="Withrawal_Level"),
     path("WithdrawalHistory",views.WithdrawalHistory,name="WithdrawalHistory"),
-    path('Rebirth',views.Rebirth,name="Rebirth")
+    
 ]
