@@ -32,15 +32,15 @@ def Rebirth(request):
     userdata = UserDetails.objects.get(UserId = request.user)
     team = TeamMembers.objects.filter(sponser = userdata)
     
-    if len(team) >= 20:
+    if len(team) < 20:
         messages.info(request,"You dont have 20 Team members please achive the team stregth")
         return redirect("Index")
     
     teamone =  TeamOne.objects.filter(Sponser = request.user)
-    if len(teamone) >= 2:
+    if len(teamone) < 2:
         messages.info(request,"You dont have 20 Team members please achive the team stregth")
         return redirect("Index")
-    if userdata.ReBirth_Income > 50:
+    if userdata.ReBirth_Income < 50:
         messages.info(request,"You dont have Enough money")
         return redirect("Index")
     else:
